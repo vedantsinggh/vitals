@@ -1,10 +1,22 @@
 CXX := g++
 FLAGS := -Wall -Wextra -std=c++17
 INCLUDE := -Iinclude
-LD := -llib -Lraylib
+LD := -Llib -lraylib
+
 SRC := $(wildcard src/*.cpp)
+OBJ := $(SRC:src/%.cpp=build/%.o)
+TARGET := build/app
 
 all: $(TARGET)
 
-$(TARGET): 
-	$(CXX) $(FLAGS) $(INCLUDE) -o app $(LD) $(SRC)
+$(TARGET): $(OBJ)
+	$(CXX) $(FLAGS) $(INCLUDE) -o $(TARGET) $(OBJ) $(LD)
+
+build/%.o: src/%.cpp | build
+	$(CXX) $(FLAGS) $(INCLUDE) -c $< -o $@
+
+build:
+	mkdir -p build
+
+clean:
+	rm -rf build
