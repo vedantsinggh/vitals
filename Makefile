@@ -3,7 +3,7 @@ FLAGS := -Wall -Wextra -std=c++17
 INCLUDE := -Iinclude
 LD := -Llib -lraylib
 
-SRC := $(wildcard src/*.cpp) src/cJSON.c
+SRC := $(wildcard src/*.cpp) 
 OBJ := $(SRC:src/%.cpp=build/%.o) 
 TARGET := build/app
 
@@ -14,9 +14,6 @@ $(TARGET): $(OBJ)
 
 build/%.o: src/%.cpp | build
 	$(CXX) $(FLAGS) $(INCLUDE) -c $< -o $@
-
-build/cJSON.o: src/cJSON.c | build
-	gcc $(INCLUDE) -c src/cJSON.c -o build/cJSON.o
 
 build:
 	mkdir -p build
