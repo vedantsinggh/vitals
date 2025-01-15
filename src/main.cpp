@@ -6,7 +6,7 @@
 #define DISPLAY_POINT 40
 
 void DrawGraph(float *data, int dataCount, Rectangle graphArea) {
-	DrawRectangleLinesEx(graphArea, 2, RED);
+	DrawRectangleLinesEx(graphArea, 2, GRAY);
 	int start = 0;
     if (dataCount < 2) return; 
 	if (dataCount > DISPLAY_POINT) start = dataCount - DISPLAY_POINT;
@@ -45,7 +45,7 @@ int main() {
     float data[MAX_DATA_POINTS];
     int dataCount = 4;
 
-	SetTargetFPS(5);
+	SetTargetFPS(144);
 
     while (!WindowShouldClose()) {
 		screenHeight = GetScreenHeight();
@@ -53,7 +53,7 @@ int main() {
         BeginDrawing();
         ClearBackground((Color){ 200, 200, 200, 255 });
 
-        DrawText("Graph", 0.75 * screenWidth - (float)MeasureText("Graph", 20) / 2, 10, 20, RED);
+        DrawText("Graph", 0.75 * screenWidth - (float)MeasureText("Graph", 20) / 2, 10, 20, GRAY);
         Rectangle graphArea = {screenWidth/2, 0, screenWidth, screenHeight/2};
         DrawGraph(data, dataCount, graphArea);
 		if(dataCount < MAX_DATA_POINTS){
