@@ -30,7 +30,7 @@ void DrawGraph(float *data, int dataCount, Vector3 color, Rectangle graphArea) {
         Vector2 startPoint = {x1, y1};
         Vector2 endPoint = {x2, y2};
 
-        DrawCircleGradient(startPoint.x, startPoint.y, 5, Color{color.x, color.y, color.z, 200}, RAYWHITE);
+        DrawCircleGradient(endPoint.x, endPoint.y, 5, Color{color.x, color.y, color.z, 200}, RAYWHITE);
         DrawLineBezier(startPoint, endPoint, 3.0f, Color{color.x, color.y, color.z, 200});
     }
 }
@@ -70,7 +70,7 @@ int main() {
 		const float margin = 20;
         DrawText("Vitals Dashboard", screenWidth / 2 - MeasureText("Vitals Dashboard", 30) / 2, screenHeight - 30 - margin, 30, DARKGRAY);
 
-        Rectangle graphArea = {screenWidth/2 - margin, margin, screenWidth/2 - margin, screenHeight/2 - margin};
+        Rectangle graphArea = {screenWidth/2 + margin, margin, screenWidth/2 - 2 * margin, screenHeight/2 - 2 * margin};
 		DrawGraph(graphs[selected].data, graphs[selected].dataCount, graphs[selected].color, graphArea);
 
         if (graphs[selected].dataCount < MAX_DATA_POINTS) {
@@ -78,7 +78,12 @@ int main() {
             graphs[selected].dataCount++;
         }
 
-        DrawText("Press ESC to Exit", 20, screenHeight - 40, 20, GRAY);
+		Vector2 w = {screenWidth * 0.75, screenHeight * 0.75};
+		DrawRing(w, 30, 80, 90,  0.60* 360 + 90, 20,  Fade(MAROON, 0.5f));
+		DrawRingLines(w, 30, 80, 90,450, 20,  Fade(BLACK, 0.5f));
+		DrawText("60%", w.x - MeasureText("60%", 28)/2, w.y - 14, 28, BLACK);
+
+        DrawText("Press ESC to Exit", 20, screenHeight - 40, 4, GRAY);
 
         EndDrawing();
     }
