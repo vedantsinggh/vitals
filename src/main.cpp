@@ -50,7 +50,8 @@ struct Graph {
     int dataCount;
 };
 
-int main() {
+int main(){
+    SetTraceLogLevel(LOG_ERROR);
     int sock = 0;
     struct sockaddr_in serv_addr;
 
@@ -127,7 +128,7 @@ int main() {
         Image img = LoadImageFromMemory(".jpg", (unsigned char *)frame_data, frame_size);
         Texture2D texture = LoadTextureFromImage(img);
 
-        Rectangle rectangle = {20, 20, 380, 300}; 
+        Rectangle rectangle = {margin, margin, screenWidth / 2 - margin, screenHeight / 2 - margin}; 
 
         if (img.width > 0 && img.height > 0) {
 
